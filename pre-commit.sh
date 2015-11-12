@@ -5,7 +5,15 @@ CONDA_ENV_NAME=test_$PACKAGE_NAME
 git stash -q --keep-index
 
 source activate $CONDA_ENV_NAME
-[ $? -ne 0 ] && conda create -n $CONDA_ENV_NAME --file requirements.txt
+RESULT=$?
+[ $RESULT -ne 0 ] && conda create -n $CONDA_ENV_NAME --file requirements.txt
+[ $RESULT -ne 0 ] && source activate $CONDA_ENV_NAME
+
+
+
+conda install -n $CONDA_ENV_NAME --file requirements.txt
+
+conda env export -n $CONDA_ENV_NAME
 
 py.test
 RESULT=$?

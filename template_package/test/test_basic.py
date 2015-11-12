@@ -1,5 +1,7 @@
 
 def test_basic():
+    import scipy
+    
     assert True
     
     
