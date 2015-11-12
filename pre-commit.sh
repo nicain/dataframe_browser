@@ -1,7 +1,7 @@
 # Stash changes to ensure code outside of commit is not tested
 git stash -q --keep-index
 
-py.test .
+py.test
 RESULT=$?
 
 # Unstash
