@@ -4,7 +4,7 @@ CONDA_ENV_NAME=test_$PACKAGE_NAME
 # Stash changes to ensure code outside of commit is not tested
 git stash -q --keep-index
 
-source activate $CONDA_ENV_NAME
+source activate -q $CONDA_ENV_NAME
 RESULT=$?
 [ $RESULT -ne 0 ] && conda create -n $CONDA_ENV_NAME --file requirements.txt
 [ $RESULT -ne 0 ] && source activate $CONDA_ENV_NAME
