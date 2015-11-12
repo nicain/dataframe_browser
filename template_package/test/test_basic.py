@@ -1,6 +1,6 @@
 
 def test_basic():
-    assert False
+    assert True
     
     
 if __name__ == '__main__':                                    # pragma: no cover
