@@ -1,4 +1,4 @@
-PACKAGE_NAME=template_package
+PACKAGE_NAME=`python setup.py --name`
 CONDA_ENV_NAME=test_$PACKAGE_NAME
 
 # Stash changes to ensure code outside of commit is not tested
