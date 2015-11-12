@@ -4,7 +4,6 @@ def test_basic():
     import sys
     import os
     sys.path.append(os.path.join(sys.path[0],'../..'))
-    print sys.path
     import template_package as tp
     reload(tp)
     
