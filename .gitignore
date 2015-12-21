@@ -1,3 +1,4 @@
+htmlcov
 *.egg-info
 .coverage
 *.pyc
