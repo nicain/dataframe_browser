@@ -3,11 +3,19 @@ from setuptools.command.test import test as TestCommand
 import io
 import os
 import sys
+import re
 
-import receptivefield as package
+package_name = os.path.split(os.path.dirname(os.path.realpath(__file__)))[-1]
 
-here = os.path.abspath(os.path.dirname(__file__))
-package_name = package.__name__
+def get_metadata(metadata_str):
+    VERSIONFILE = os.path.join(os.path.abspath(os.path.dirname(__file__)),package_name, '__init__.py')
+    initfile_lines = open(VERSIONFILE, 'rt').readlines()
+    VSRE = r"^%s = ['\"]([^'\"]*)['\"]" % metadata_str
+    for line in initfile_lines:
+        mo = re.search(VSRE, line, re.M)
+        if mo:
+            return mo.group(1)
+    raise RuntimeError('Unable to find version string in %s.' % (VERSIONFILE,))
 
 def read(*filenames, **kwargs):
     encoding = kwargs.get('encoding', 'utf-8')
@@ -45,11 +53,11 @@ class PyTest(TestCommand):
             errcode = pytest.main(self.test_args)
         sys.exit(errcode)
 
-
+version = get_metadata('__version__')
 
 setup(
     name=package_name,
-    version=package.__version__,
+    version=version,
     tests_require=['pytest'],
     install_requires=[],
     cmdclass={'test': PyTest},
